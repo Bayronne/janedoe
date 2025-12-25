@@ -1,9 +1,7 @@
 import { ArrowDown, Download, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 export function HeroSection() {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.1),transparent_50%)]" />
@@ -22,9 +20,7 @@ export function HeroSection() {
           </div>
 
           {/* Name & Title */}
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 animate-fade-up animation-delay-100">
-            Juan Dela Cruz
-          </h1>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 animate-fade-up animation-delay-100">Jane Doe</h1>
           <p className="text-lg md:text-xl text-accent font-medium mb-4 animate-fade-up animation-delay-200">
             Registered Criminologist
           </p>
@@ -57,6 +53,5 @@ export function HeroSection() {
           </a>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
