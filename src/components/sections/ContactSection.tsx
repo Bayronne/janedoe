@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Linkedin, ExternalLink, Download, Send, Loader2 } from "lucide-react";
+import { Mail, Linkedin, Download, Send, Loader2 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { OnlineJobsIcon } from "@/components/icons/OnlineJobsIcon";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -71,7 +72,7 @@ export function ContactSection() {
     },
     {
       href: "https://www.onlinejobs.ph/jobseekers/info/3435377",
-      icon: ExternalLink,
+      icon: OnlineJobsIcon,
       label: "OnlineJobs.ph Profile",
       color: "gold",
     },
