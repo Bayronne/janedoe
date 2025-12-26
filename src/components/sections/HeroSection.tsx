@@ -1,6 +1,7 @@
 import { ArrowDown, Download, Mail, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import baronPhoto from "@/assets/baron.png";
 
 export function HeroSection() {
   return (
@@ -61,11 +62,11 @@ export function HeroSection() {
                   ease: "easeInOut",
                 }}
               />
-              <div className="w-full h-full rounded-full bg-muted flex items-center justify-center relative z-10">
-                <span className="text-4xl md:text-5xl font-display text-muted-foreground">
-                  OB
-                </span>
-              </div>
+              <img 
+                src={baronPhoto} 
+                alt="Orgeil Baron" 
+                className="w-full h-full rounded-full object-cover relative z-10"
+              />
             </motion.div>
           </motion.div>
 
