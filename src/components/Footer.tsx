@@ -10,7 +10,7 @@ export function Footer() {
           </div>
           
           <p className="text-muted-foreground text-sm text-center">
-            © {currentYear} Juan Dela Cruz. Registered Criminologist. All rights reserved.
+            © {currentYear} Orgeil Baron. Administrative Virtual Assistant. All rights reserved.
           </p>
           
           <div className="flex items-center gap-4">
