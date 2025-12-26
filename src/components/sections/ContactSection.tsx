@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Mail, Linkedin, Download, Send, Loader2 } from "lucide-react";
+import { Linkedin, Download, Send, Loader2 } from "lucide-react";
+import { GmailIcon } from "@/components/icons/GmailIcon";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -60,7 +61,7 @@ export function ContactSection() {
   const contactLinks = [
     {
       href: "mailto:orgeilbaron@gmail.com",
-      icon: Mail,
+      icon: GmailIcon,
       label: "orgeilbaron@gmail.com",
       color: "primary",
     },
