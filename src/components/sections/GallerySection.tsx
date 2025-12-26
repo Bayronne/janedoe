@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useRef } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { X, ZoomIn } from "lucide-react";
+import { ZoomIn } from "lucide-react";
 
 const galleryItems = [
   {
@@ -50,8 +51,33 @@ const galleryItems = [
 
 const categories = ["All", "Infographics", "Research", "Scripts", "Publications", "Presentations"];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] as const },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.8,
+    y: -20,
+    transition: { duration: 0.3 },
+  },
+};
+
 export function GallerySection() {
-  const { ref, isVisible } = useScrollAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedItem, setSelectedItem] = useState<typeof galleryItems[0] | null>(null);
 
@@ -60,23 +86,27 @@ export function GallerySection() {
     : galleryItems.filter(item => item.category === selectedCategory);
 
   return (
-    <section id="gallery" className="py-20 md:py-28">
+    <section id="gallery" className="py-20 md:py-28 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div
+        <motion.div
           ref={ref}
-          className={`max-w-6xl mx-auto transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={containerVariants}
+          className="max-w-6xl mx-auto"
         >
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4">
+          <motion.h2
+            variants={itemVariants}
+            className="font-display text-3xl md:text-4xl font-bold text-center mb-4"
+          >
             Sample Work
-          </h2>
-          <div className="w-20 h-1 bg-accent mx-auto mb-8" />
+          </motion.h2>
+          <motion.div variants={itemVariants} className="w-20 h-1 bg-accent mx-auto mb-8" />
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {/* Animated Category Filter */}
+          <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-2 mb-10">
             {categories.map((category) => (
-              <button
+              <motion.button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
@@ -84,65 +114,113 @@ export function GallerySection() {
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground hover:bg-muted/80"
                 }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                layout
               >
                 {category}
-              </button>
+              </motion.button>
             ))}
-          </div>
+          </motion.div>
 
-          {/* Gallery Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredItems.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => setSelectedItem(item)}
-                className="group cursor-pointer rounded-xl overflow-hidden bg-card border border-border/50 hover:border-accent/50 hover:shadow-xl transition-all duration-300"
-              >
-                {/* Image Placeholder */}
-                <div className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <span className="text-3xl font-display font-bold text-primary/50">
-                    {item.placeholder}
-                  </span>
-                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <ZoomIn className="h-8 w-8 text-primary" />
+          {/* Gallery Grid with AnimatePresence */}
+          <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence mode="popLayout">
+              {filteredItems.map((item) => (
+                <motion.div
+                  key={item.id}
+                  layout
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  onClick={() => setSelectedItem(item)}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="group cursor-pointer rounded-xl overflow-hidden bg-card border border-border/50 hover:border-accent/50 hover:shadow-xl transition-colors"
+                >
+                  {/* Image Placeholder with Hover Effect */}
+                  <div className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center overflow-hidden">
+                    <motion.span
+                      className="text-3xl font-display font-bold text-primary/50"
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      {item.placeholder}
+                    </motion.span>
+                    
+                    {/* Overlay with Zoom Icon */}
+                    <motion.div
+                      className="absolute inset-0 bg-primary/20 flex items-center justify-center"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        whileHover={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 200 }}
+                      >
+                        <ZoomIn className="h-10 w-10 text-primary" />
+                      </motion.div>
+                    </motion.div>
                   </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-4">
-                  <span className="inline-block px-2 py-0.5 bg-accent/10 text-accent text-xs font-medium rounded mb-2">
-                    {item.category}
-                  </span>
-                  <h3 className="font-semibold text-base mb-1">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm line-clamp-2">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+                  
+                  {/* Content */}
+                  <div className="p-4">
+                    <motion.span
+                      className="inline-block px-2 py-0.5 bg-accent/10 text-accent text-xs font-medium rounded mb-2"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {item.category}
+                    </motion.span>
+                    <h3 className="font-semibold text-base mb-1">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm line-clamp-2">{item.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Lightbox Dialog */}
-      <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
-        <DialogContent className="max-w-3xl p-0 overflow-hidden">
-          {selectedItem && (
-            <div>
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <span className="text-6xl font-display font-bold text-primary/50">
-                  {selectedItem.placeholder}
-                </span>
-              </div>
-              <div className="p-6">
-                <span className="inline-block px-3 py-1 bg-accent/10 text-accent text-sm font-medium rounded-full mb-3">
-                  {selectedItem.category}
-                </span>
-                <h3 className="font-display text-2xl font-semibold mb-2">{selectedItem.title}</h3>
-                <p className="text-muted-foreground">{selectedItem.description}</p>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      {/* Animated Lightbox Dialog */}
+      <AnimatePresence>
+        {selectedItem && (
+          <Dialog open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
+            <DialogContent className="max-w-3xl p-0 overflow-hidden">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              >
+                <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                  <motion.span
+                    className="text-6xl font-display font-bold text-primary/50"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1, rotate: [0, 5, -5, 0] }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                  >
+                    {selectedItem.placeholder}
+                  </motion.span>
+                </div>
+                <motion.div
+                  className="p-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <span className="inline-block px-3 py-1 bg-accent/10 text-accent text-sm font-medium rounded-full mb-3">
+                    {selectedItem.category}
+                  </span>
+                  <h3 className="font-display text-2xl font-semibold mb-2">{selectedItem.title}</h3>
+                  <p className="text-muted-foreground">{selectedItem.description}</p>
+                </motion.div>
+              </motion.div>
+            </DialogContent>
+          </Dialog>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
