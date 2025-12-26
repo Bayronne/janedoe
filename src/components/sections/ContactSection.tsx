@@ -59,9 +59,9 @@ export function ContactSection() {
 
   const contactLinks = [
     {
-      href: "mailto:juan.delacruz@email.com",
+      href: "mailto:orgeilbaron@gmail.com",
       icon: Mail,
-      label: "juan.delacruz@email.com",
+      label: "orgeilbaron@gmail.com",
       color: "primary",
     },
     {
