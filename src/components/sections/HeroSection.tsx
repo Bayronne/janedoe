@@ -44,92 +44,29 @@ export function HeroSection() {
             transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
             className="mb-8"
           >
-            {/* Floating container */}
             <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative"
+              className="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-1 relative"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              {/* Outer rotating ring */}
+              {/* Glow Effect */}
               <motion.div
-                className="absolute inset-[-8px] rounded-full"
-                style={{
-                  background: "conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)))",
+                className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/50 to-accent/50 blur-xl"
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                  scale: [1, 1.1, 1],
                 }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              />
-              
-              {/* Second rotating ring (opposite direction) */}
-              <motion.div
-                className="absolute inset-[-4px] rounded-full"
-                style={{
-                  background: "conic-gradient(from 180deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent)))",
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
                 }}
-                animate={{ rotate: -360 }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
               />
-
-              <motion.div
-                className="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-1 relative"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                {/* Pulsing Glow Effect */}
-                <motion.div
-                  className="absolute inset-[-20px] rounded-full bg-gradient-to-br from-primary/40 to-accent/40 blur-2xl"
-                  animate={{
-                    opacity: [0.3, 0.7, 0.3],
-                    scale: [0.9, 1.2, 0.9],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                
-                {/* Secondary pulse layer */}
-                <motion.div
-                  className="absolute inset-[-10px] rounded-full bg-gradient-to-tr from-accent/30 to-primary/30 blur-xl"
-                  animate={{
-                    opacity: [0.5, 0.2, 0.5],
-                    scale: [1.1, 0.95, 1.1],
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.5,
-                  }}
-                />
-
-                {/* Morphing gradient border */}
-                <motion.div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: "linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)))",
-                    backgroundSize: "200% 200%",
-                  }}
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-
-                {/* Inner background to create border effect */}
-                <div className="absolute inset-[3px] rounded-full bg-background" />
-
-                <img 
-                  src={baronPhoto} 
-                  alt="Orgeil Baron" 
-                  className="w-full h-full rounded-full object-cover relative z-10"
-                />
-              </motion.div>
+              <img 
+                src={baronPhoto} 
+                alt="Orgeil Baron" 
+                className="w-full h-full rounded-full object-cover relative z-10"
+              />
             </motion.div>
           </motion.div>
 
