@@ -13,17 +13,15 @@ export function HeroSection() {
             <div className="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-1">
               <div className="w-full h-full rounded-full bg-muted flex items-center justify-center">
                 <span className="text-4xl md:text-5xl font-display text-muted-foreground">
-                  JD
+                  OB
                 </span>
               </div>
             </div>
           </div>
 
           {/* Name & Title */}
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 animate-fade-up animation-delay-100">Jane Doe</h1>
-          <p className="text-lg md:text-xl text-accent font-medium mb-4 animate-fade-up animation-delay-200">
-            Registered Criminologist
-          </p>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 animate-fade-up animation-delay-100">Orgeil Baron</h1>
+          <p className="text-lg md:text-xl text-accent font-medium mb-4 animate-fade-up animation-delay-200">Administrative Virtual Assistant</p>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto mb-8 animate-fade-up animation-delay-300">
             Passionate about applying criminology expertise to protect communities, 
             prevent digital crime, and empower individuals through education and advocacy.
