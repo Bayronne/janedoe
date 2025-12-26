@@ -153,7 +153,7 @@ export function ContactSection() {
                   </a>
 
                   <a
-                    href="https://onlinejobs.ph/profile"
+                    href="https://www.onlinejobs.ph/jobseekers/info/3435377"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
