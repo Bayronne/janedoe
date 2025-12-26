@@ -1,15 +1,12 @@
 import { Shield } from "lucide-react";
-
 export function Footer() {
   const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="py-8 border-t border-border">
+  return <footer className="py-8 border-t border-border">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-primary" />
-            <span className="font-display font-semibold">Juan Dela Cruz</span>
+            <span className="font-display font-semibold">Orgeil Baron</span>
           </div>
           
           <p className="text-muted-foreground text-sm text-center">
@@ -26,6 +23,5 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 }
