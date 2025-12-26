@@ -6,7 +6,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-primary" />
-            <span className="font-display font-semibold">© 2025 Orgeil Baron. Virtual Assistant. All rights reserved.</span>
+            <span className="font-display font-semibold">Orgeil Baron</span>
           </div>
           
           <p className="text-muted-foreground text-sm text-center">
