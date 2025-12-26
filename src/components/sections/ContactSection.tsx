@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Linkedin, Download, Send, Loader2 } from "lucide-react";
+import { Download, Send, Loader2 } from "lucide-react";
 import { GmailIcon } from "@/components/icons/GmailIcon";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -67,7 +68,7 @@ export function ContactSection() {
     },
     {
       href: "https://linkedin.com/in/juandelacruz",
-      icon: Linkedin,
+      icon: LinkedInIcon,
       label: "LinkedIn Profile",
       color: "accent",
     },
