@@ -219,16 +219,10 @@ export function ContactSection() {
                       transition={{ delay: index * 0.1 + 0.3 }}
                     >
                       <motion.div
-                        className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                          link.color === 'primary' ? 'bg-primary/10' :
-                          link.color === 'accent' ? 'bg-accent/10' : 'bg-gold/10'
-                        }`}
+                        className="w-10 h-10 rounded-lg flex items-center justify-center bg-background border border-border shadow-sm"
                         whileHover={{ scale: 1.1, rotate: 5 }}
                       >
-                        <link.icon className={`h-5 w-5 ${
-                          link.color === 'primary' ? 'text-primary' :
-                          link.color === 'accent' ? 'text-accent' : 'text-gold'
-                        }`} />
+                        <link.icon className="h-5 w-5" />
                       </motion.div>
                       <span className="text-sm">{link.label}</span>
                     </motion.a>
